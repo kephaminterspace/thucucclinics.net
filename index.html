@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Làm đẹp công nghệ Tế bào gốc</title>
     <meta name="description" content="">
@@ -17,7 +17,7 @@
     <!-- onepage scroll stylesheet-->
     <link rel="stylesheet" href="css/onepage-scroll.css">
     <!-- theme stylesheet-->
-    <link rel="stylesheet" href="css/style.css" id="theme-stylesheet">
+    <link rel="stylesheet" href="css/style.css" id="">
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="css/responsive.css" id="theme-stylesheet">
     <link rel="stylesheet" href="css/custom.css">
@@ -127,15 +127,15 @@
                 					<div class="frm-kh">
                             <span class="title">Đăng ký</span>
                 						<form id="formpcell" accept-charset="utf-8" action="https://app.getresponse.com/add_subscriber.html" method="post">
-                							<input class="validate[required] text-input" name="name" type="text" placeholder="Họ và tên" />
-                							<input class="validate[required,custom[email]]" name="email" type="text" placeholder="E-mail" />
-                							<input class="validate[required,custom[phone]]" name="custom_sodienthoai" type="text" value="" placeholder="Số điện thoại" />
+                							<input class="validate[required] text-input" id="name" name="name" type="text" placeholder="Họ và tên" />
+                							<input class="validate[required,custom[email]]" id="email" name="email" type="text" placeholder="E-mail" />
+                							<input class="validate[required,custom[phone]]" id="custom_sodienthoai" name="custom_sodienthoai" type="text" value="" placeholder="Số điện thoại" />
                                             <span class="title-dv">Chọn dịch vụ:</span> 
-                                            <select class="select_dv" name="custom_cl_dichvu">
-                                                <option value="---Chọn dịch vụ---">---Chọn dịch vụ---</option> 
-                                                <option value="Thu nhỏ lỗ chân lông">Thu nhỏ lỗ chân lông</option> 
-                                                <option value="Trẻ hóa da">Trẻ hóa da</option> 
-                                                <option value="Trị sẹo">Trị sẹo</option> 
+                                            <select class="select_dv" id="custom_dich_vu" name="custom_cl_dichvu">
+                                                <option value="---Chọn dịch vụ---">---Chọn dịch vụ---</option>
+                                                <option value="Thu nhỏ lỗ chân lông">Thu nhỏ lỗ chân lông</option>
+                                                <option value="Trẻ hóa da">Trẻ hóa da</option>
+                                                <option value="Trị sẹo">Trị sẹo</option>
                                             </select><br/>
                 							<input name="campaign_token" type="hidden" value="pqSwS" />
                 							<input name="thankyou_url" type="hidden" value="http://thucucclinics.net/thank-you.html" />
@@ -342,12 +342,44 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <script src="js/jquery.onepage-scroll.js"></script>
     <script src="js/front.js"></script>
-    
-<script type="text/javascript">
- function formSubmitClick() {
-    var emailText = document.getElementById("form_email").value;
-    document.getElementsByName("thankyou_url")[0].value = "http://thucucclinics.net/thank-you.html?order_id=" + emailText;
- }
-</script>
+
+    <script src="//cdn.accesstrade.vn/js/tracking.js" ></script>
+    <script type="text/javascript">
+        AT.track();
+        function getCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for(var i = 0; i <ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0)==' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length,c.length);
+                }
+            }
+            return "";
+        }
+    </script>
+
+    <script type="text/javascript">
+        function formSubmitClick() {
+            alert(document.getElementById("custom_dich_vu").value);
+
+            var d = new Date();
+            var timestamp = d.getTime();
+            var params = 'name=' + document.getElementById("name").value;
+            params = params + '&email=' + timestamp + '_' + document.getElementById("email").value;
+            params = params + '&phone=' + document.getElementById("custom_sodienthoai").value;
+            params = params + '&dichvu=' + document.getElementById("custom_dich_vu").value;
+            params = params + '&aff_source='+getCookie("_aff_network");
+            params = params + '&aff_sid=' + getCookie("_aff_sid");
+            params = params + '&identifier=' + timestamp + '_' + document.getElementById("email").value;
+
+
+           document.getElementsByName("thankyou_url")[0].value = "http://thucucclinics.net/thank-you.html?form=" + encodeURIComponent(params);
+            //document.getElementsByName("thankyou_url")[0].value = "http://localhost:8080/thucucclinics.net/thank-you.html?" + params;
+        }
+    </script>
   </body>
 </html>

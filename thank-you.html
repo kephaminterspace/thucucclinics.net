@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Landing page P'cell</title>
     <meta name="description" content="">
@@ -19,7 +19,7 @@
     <!-- theme stylesheet-->
     <link rel="stylesheet" href="css/style.css" id="theme-stylesheet">
     <!-- Custom stylesheet - for your changes-->
-    <link rel="stylesheet" href="css/responsive.css" id="theme-stylesheet">
+    <link rel="stylesheet" href="css/responsive.css" id="">
     <link rel="stylesheet" href="css/custom.css">
     <!-- Favicon-->
     <link rel="shortcut icon" href="favicon.png">
@@ -139,22 +139,29 @@
 
     
     <!-- Javascript files-->
+    <script src="http://thammythucuc.vn/wp-content/themes/thucuc/js/jquery-1.8.2.min.js" type="text/javascript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/jquery-1.11.0.min.js"><\/script>')</script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <script src="js/jquery.onepage-scroll.js"></script>
     <script src="js/front.js"></script>
- 
-<script type="text/javascript">
-    var query = window.location.search.substring(1);
-    var order_id = query.split("=")[1];
 
-    var a = document.createElement("img");
-    a.width = 1;
-    a.height = 1;
-    a.border = 0;
-    a.src = "https://cv.accesstrade.vn/cv.php?identifier=" + order_id + "&mcn=b73ce398c39f506af761d2277d853a92&result_id=102";
-    document.body.appendChild( a );
-</script>
+    <script type="text/javascript">
+        var query = window.location.search.substring(1);
+        $(document).ready(function(){
+            $.ajax({
+                type: 'GET',
+                url: 'controller.php?'+query,
+                success: function(result) {
+                    console.log(result);
+                },error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    console.log("Status: " + textStatus);
+                    console.log("Error: " + errorThrown);
+                }
+            });
+        });
+
+    </script>
+
   </body>
 </html>
