@@ -1,8 +1,9 @@
 <?php
+    $t = time();
     $arr = array(
         'properties' => array(
             array(
-                'property' => 'email',
+                'property' => 'tc_email',
                 'value' => $_GET['email']
             ),
             array(
@@ -30,7 +31,7 @@
             ),
             array(
                 'property' => 'identifier',
-                'value' => $_GET['identifier']
+                'value' => $t.'_'.$_GET['email']
             ),
             array(
                 'property' => 'hs_lead_status',
