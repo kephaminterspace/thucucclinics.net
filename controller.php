@@ -1,4 +1,5 @@
 <?php
+if($_GET['email'] && $_GET['name']) {
     $t = time();
     $arr = array(
         'properties' => array(
@@ -21,7 +22,7 @@
             array(
                 'property' => 'dichvu',
                 'value' => $_GET['dichvu']
-            ),            array(
+            ), array(
                 'property' => 'aff_source',
                 'value' => $_GET['aff_source']
             ),
@@ -31,7 +32,7 @@
             ),
             array(
                 'property' => 'identifier',
-                'value' => $t.'_'.$_GET['email']
+                'value' => $t . '_' . $_GET['email']
             ),
             array(
                 'property' => 'hs_lead_status',
@@ -55,8 +56,8 @@
 
     if ($status_code == 200) {
         $msg = 'success';
-    }else{
+    } else {
         $msg = 'error';
     }
     echo $msg;
-
+}
